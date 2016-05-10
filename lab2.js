@@ -1,9 +1,14 @@
 var f = document.getElementById("first");
 var s = document.getElementById("second");
 var t = document.getElementById("third");
+var greeting = document.getElementById("greeting");
+
 
 var userName = prompt("what is your name?");
 alert("hello " + userName + " i have some yes/no questions for you");
+
+
+greeting.textContent = "Welcome " + userName + "!";
 
 var keepAsking = true;
 while (keepAsking) {
@@ -16,6 +21,7 @@ while (keepAsking) {
   else if (firstAnswer.toLowerCase() == "no") {
     alert("that's incorrect. i do have a BA");
     keepAsking = false;
+    f.textContent = "sorry, that's incorrect :("
   }
   else {
     alert("not a valid answer");
@@ -34,6 +40,7 @@ while (secondAsking) {
   else if (secondAsking.toLowerCase() == "no") {
     alert("that's incorrect. i recently adventured to iceland and thailand");
     secondAsking = false;
+    s.textContent = "sorry, that's incorrect. michelle has travelled to at least 7 different places this past year."
   }
   else {
     alert("not a valid answer");
@@ -50,8 +57,9 @@ while (thirdAsking) {
     t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!"
   }
   else if (thirdAsking.toLowerCase() == "no") {
-    alert("that's incorrect. playing basketball and dancing my whole life have taught me how to work in teams.");
+    alert("that's incorrect.");
     thirdAsking = false;
+    t.textContent = "that's incorrect. playing basketball and dancing my whole life have taught me how to work in teams."
   }
   else {
     alert("not a valid answer");
