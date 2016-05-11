@@ -62,7 +62,7 @@ var thirdAsking = true;
 while (thirdAsking) {
   var thirdAsking = prompt("is michelle a great person to hire?");
   if (thirdAsking.toLowerCase() == "yes") {
-    alert("correct! michelle am great at teamwork!");
+    alert("correct! michelle is great at teamwork!");
     thirdAsking = false;
     correct += 1;
     t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!"
@@ -111,6 +111,7 @@ while (keepAsking) {
       console.log("counter = " + counter);
       if (counter > 2) {
         keepAsking = false;
+        alert("you have no more guesses left");
       }
     }
 
