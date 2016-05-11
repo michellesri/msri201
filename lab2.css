@@ -1,0 +1,21 @@
+body {
+  background-color: black;
+  color: #0DC8FF;
+  padding: 20px;
+  font-family: Arial inherit;
+  font-size: 20;
+  opacity: .95;
+}
+
+h1 {
+    color: white;
+    opacity: .9;
+    font-size: 50;
+}
+
+h2 {
+  color: white;
+  padding: 0px;
+  margin: 50px;
+  opacity: .8;
+}
