@@ -3,8 +3,25 @@ var s = document.getElementById("second");
 var t = document.getElementById("third");
 var fourth = document.getElementById("fourth");
 var fifth = document.getElementById("fifth");
-var numCorrect = document.getElementById("numCorrect")
+var numCorrect = document.getElementById("numCorrect");
 var greeting = document.getElementById("greeting");
+
+var arrQuestions = [
+  'does michelle have a bachelor\s degree?', 'is michelle a fun person who likes adventure?', 'is michelle a great person to hire?', 'what is michelle\'s ideal basketball number?', 'can you guess a color that michelle likes?'
+];
+
+var answer1 = [
+  'correct!', "that's incorrect. michelle does have a BA", "sorry, that's incorrect :("];
+
+var answer2 = ["correct!", "that's incorrect. michelle recently adventured to iceland and thailand", "not a valid answer"
+];
+
+var answer3 = ["correct! michelle is great at teamwork!", "that's incorrect.", "not a valid answer"];
+
+//Come back to later
+var answer4 = ["woohoo correct!"];
+
+var answer5 = ["that's correct!", "that's not a right color"];
 
 var userName = prompt("what is your name?");
 alert("hello " + userName + " i have some yes/no questions for you");
@@ -14,63 +31,75 @@ var correct = 0;
 var totalQuest = 0;
 
 greeting.textContent = "Welcome " + userName + "!";
+var funkOne = function(){
+console.log('You are here.');
 
-var keepAsking = true;
-totalQuest++;
-while (keepAsking) {
-  var firstAnswer = prompt("does michelle have a bachelor's degree?");
-  if (firstAnswer.toLowerCase() == "yes") {
-    alert("correct!");
-    keepAsking = false;
-    correct += 1;
-    f.textContent = "degree " + firstAnswer + " woohoo bachelor's!"
+  var keepAsking = true;
+  totalQuest++;
+  while (keepAsking) {
+    var firstAnswer = prompt(arrQuestions[0]);
+    if (firstAnswer.toLowerCase() == "yes" || firstAnswer.toLowerCase() == "y") {
+      alert(answer1[0]);
+      console.log(alert(answer1[0]));
+      keepAsking = false;
+      correct += 1;
+      f.textContent = "degree " + firstAnswer + " woohoo bachelor's!";
+    }
+    else if (firstAnswer.toLowerCase() == "no" || firstAnswer.toLowerCase() == "n") {
+      alert(answer1[1]);
+      console.log(alert(answer1[1]));
+      keepAsking = false;
+      f.textContent = "sorry, that's incorrect :(";
+    }
+    else {
+      alert(answer1[2]);
+      console.log('answer displayed: ' + answer1[2]);
+      keepAsking = true;
+    }
   }
-  else if (firstAnswer.toLowerCase() == "no") {
-    alert("that's incorrect. michelle does have a BA");
-    keepAsking = false;
-    f.textContent = "sorry, that's incorrect :("
-  }
-  else {
-    alert("not a valid answer");
-    keepAsking = true;
-  }
-}
+};
+funkOne();
 
+//end funkOne
+
+
+
+/*
 totalQuest++;
 var secondAsking = true;
 while (secondAsking) {
   var secondAsking = prompt("is michelle a fun person who likes adventure?");
-  if (secondAsking.toLowerCase() == "yes") {
+  if (secondAsking.toLowerCase() == "yes" || secondAsking.toLowerCase() == "y") {
     alert("correct!");
     secondAsking = false;
     correct += 1;
-    s.textContent = "michelle is fun and adventurous!"
+    s.textContent = "michelle is fun and adventurous!";
   }
-  else if (secondAsking.toLowerCase() == "no") {
+  else if (secondAsking.toLowerCase() == "no" || secondAsking.toLowerCase() == "n") {
     alert("that's incorrect. michelle recently adventured to iceland and thailand");
     secondAsking = false;
-    s.textContent = "sorry, that's incorrect. michelle has travelled to at least 7 different places this past year."
+    s.textContent = "sorry, that's incorrect. michelle has travelled to at least 7 different places this past year.";
   }
   else {
     alert("not a valid answer");
     secondAsking = true;
   }
 }
-
-totalQuest++;
+*/
+/* totalQuest++;
 var thirdAsking = true;
 while (thirdAsking) {
   var thirdAsking = prompt("is michelle a great person to hire?");
-  if (thirdAsking.toLowerCase() == "yes") {
+  if (thirdAsking.toLowerCase() == "yes" || thirdAsking.toLowerCase() == "y") {
     alert("correct! michelle am great at teamwork!");
     thirdAsking = false;
     correct += 1;
-    t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!"
+    t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!";
   }
-  else if (thirdAsking.toLowerCase() == "no") {
+  else if (thirdAsking.toLowerCase() == "no" || thirdAsking.toLowerCase() == "n") {
     alert("that's incorrect.");
     thirdAsking = false;
-    t.textContent = "that's incorrect. playing basketball and dancing for most of her life has taught her how to work in teams."
+    t.textContent = "that's incorrect. playing basketball and dancing for most of her life has taught her how to work in teams.";
   }
   else {
     alert("not a valid answer");
@@ -95,7 +124,7 @@ while (keepAsking) {
       keepAsking = false;
       correct += 1;
     }
-    else if (fourthAsking != 23) {
+    else {
       if (fourthAsking > 23) {
         fourthAsking = prompt("too high! try again.");
       }
@@ -136,4 +165,4 @@ if (!rightAnswer) {
 }
 
 
-numCorrect.textContent = userName + ",you got " + correct + "/" + totalQuest + " correct";
+numCorrect.textContent = userName + ", you got " + correct + "/" + totalQuest + " correct"; */
