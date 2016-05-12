@@ -7,7 +7,7 @@ var numCorrect = document.getElementById("numCorrect")
 var greeting = document.getElementById("greeting");
 
 var userName = prompt("what is your name?");
-alert("hello " + userName + " i have some yes/no questions for you");
+alert("hello " + userName + " i have some yes/no (y/n) questions for you");
 console.log(userName);
 
 var correct = 0;
@@ -19,13 +19,13 @@ var keepAsking = true;
 totalQuest++;
 while (keepAsking) {
   var firstAnswer = prompt("does michelle have a bachelor's degree?");
-  if (firstAnswer.toLowerCase() == "yes") {
+  if (firstAnswer.toLowerCase() == "yes" || first.Answer.toLowerCase() == "y") {
     alert("correct!");
     keepAsking = false;
     correct += 1;
     f.textContent = "degree " + firstAnswer + " woohoo bachelor's!"
   }
-  else if (firstAnswer.toLowerCase() == "no") {
+  else if (firstAnswer.toLowerCase() == "no" || firstAnswer.toLowerCase() == "n") {
     alert("that's incorrect. michelle does have a BA");
     keepAsking = false;
     f.textContent = "sorry, that's incorrect :("
@@ -40,13 +40,13 @@ totalQuest++;
 var secondAsking = true;
 while (secondAsking) {
   var secondAsking = prompt("is michelle a fun person who likes adventure?");
-  if (secondAsking.toLowerCase() == "yes") {
+  if (secondAsking.toLowerCase() == "yes" || secondAsking.toLowerCase() == "y") {
     alert("correct!");
     secondAsking = false;
     correct += 1;
     s.textContent = "michelle is fun and adventurous!"
   }
-  else if (secondAsking.toLowerCase() == "no") {
+  else if (secondAsking.toLowerCase() == "no"|| secondAsking.toLowerCase() == "n") {
     alert("that's incorrect. michelle recently adventured to iceland and thailand");
     secondAsking = false;
     s.textContent = "sorry, that's incorrect. michelle has travelled to at least 7 different places this past year."
@@ -61,13 +61,13 @@ totalQuest++;
 var thirdAsking = true;
 while (thirdAsking) {
   var thirdAsking = prompt("is michelle a great person to hire?");
-  if (thirdAsking.toLowerCase() == "yes") {
+  if (thirdAsking.toLowerCase() == "yes" || thirdAsking.toLowerCase() == "y") {
     alert("correct! michelle is great at teamwork!");
     thirdAsking = false;
     correct += 1;
     t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!"
   }
-  else if (thirdAsking.toLowerCase() == "no") {
+  else if (thirdAsking.toLowerCase() == "no" || thirdAsking.toLowerCase() == "n") {
     alert("that's incorrect.");
     thirdAsking = false;
     t.textContent = "that's incorrect. playing basketball and dancing for most of her life has taught her how to work in teams."
