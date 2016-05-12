@@ -95,7 +95,7 @@ while (keepAsking) {
       keepAsking = false;
       correct += 1;
     }
-    else if (fourthAsking != 23) {
+    else {
       if (fourthAsking > 23) {
         fourthAsking = prompt("too high! try again.");
       }
