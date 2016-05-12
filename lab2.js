@@ -7,7 +7,7 @@ var numCorrect = document.getElementById("numCorrect")
 var greeting = document.getElementById("greeting");
 
 var userName = prompt("what is your name?");
-alert("hello " + userName + " i have some yes/no (y/n) questions for you");
+alert("hello " + userName + " i have some yes/no questions for you");
 console.log(userName);
 
 var correct = 0;
@@ -19,7 +19,7 @@ var keepAsking = true;
 totalQuest++;
 while (keepAsking) {
   var firstAnswer = prompt("does michelle have a bachelor's degree?");
-  if (firstAnswer.toLowerCase() == "yes" || first.Answer.toLowerCase() == "y") {
+  if (firstAnswer.toLowerCase() == "yes" || firstAnswer.toLowerCase() == "y") {
     alert("correct!");
     keepAsking = false;
     correct += 1;
@@ -46,7 +46,7 @@ while (secondAsking) {
     correct += 1;
     s.textContent = "michelle is fun and adventurous!"
   }
-  else if (secondAsking.toLowerCase() == "no"|| secondAsking.toLowerCase() == "n") {
+  else if (secondAsking.toLowerCase() == "no" || secondAsking.toLowerCase() == "n") {
     alert("that's incorrect. michelle recently adventured to iceland and thailand");
     secondAsking = false;
     s.textContent = "sorry, that's incorrect. michelle has travelled to at least 7 different places this past year."
@@ -62,7 +62,7 @@ var thirdAsking = true;
 while (thirdAsking) {
   var thirdAsking = prompt("is michelle a great person to hire?");
   if (thirdAsking.toLowerCase() == "yes" || thirdAsking.toLowerCase() == "y") {
-    alert("correct! michelle is great at teamwork!");
+    alert("correct! michelle am great at teamwork!");
     thirdAsking = false;
     correct += 1;
     t.textContent = "michelle is outgoing and helps new team members integrate to their new teams!"
@@ -111,7 +111,6 @@ while (keepAsking) {
       console.log("counter = " + counter);
       if (counter > 2) {
         keepAsking = false;
-        alert("you have no more guesses left");
       }
     }
 
@@ -137,4 +136,4 @@ if (!rightAnswer) {
 }
 
 
-numCorrect.textContent = userName + ",you got " + correct + "/" + totalQuest + " correct";
+numCorrect.textContent = userName + ", you got " + correct + "/" + totalQuest + " correct";
