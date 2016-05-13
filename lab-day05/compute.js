@@ -31,3 +31,15 @@ function sumArray(arr) {
 };
 
 sumArray([10,20,30,40]);
+
+//Problem 5
+function multiplyArray(arr) {
+  var q = 1;
+  for (var i = 0; i < arr.length; i++){
+    q *= arr[i];
+  }
+  console.table(arr);
+  console.log(q);
+};
+
+multiplyArray([10,20,30,40]);
