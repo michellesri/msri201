@@ -18,3 +18,16 @@ function sumAndMuliply(a, b, c) {
   console.log(a + ' and ' + b + ' and ' + c + ' sum to ' + arr[0]);
   console.log('The numbers ' + a + ' and ' + b + ' and ' + c + ' have a product of ' + arr[1]);
 };
+
+
+//Problem 4
+function sumArray(arr) {
+  var q = 0;
+  for (var i = 0; i < arr.length; i++){
+    q += (arr[i]);
+  }
+  console.table(arr);
+  console.log(q);
+};
+
+sumArray([10,20,30,40]);
