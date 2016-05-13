@@ -1,6 +1,6 @@
 body {
-  background-color: black;
-  color: #0DC8FF;
+  background-color: white;
+  color: black;
   padding: 20px;
   font-family: Arial inherit;
   font-size: 20;
@@ -8,14 +8,19 @@ body {
 }
 
 h1 {
-    color: white;
+    color: teal;
     opacity: .9;
     font-size: 50;
 }
 
 h2 {
-  color: white;
+  color: teal;
   padding: 0px;
-  margin: 50px;
+  margin: 30px;
   opacity: .8;
+}
+
+h3 {
+  color: teal;
+  padding: 0px;
 }
