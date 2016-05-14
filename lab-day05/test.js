@@ -17,7 +17,7 @@ else {
 
 // problem3 test
 function testSAM(a,b,c) {
-  if (sumSAM === sum(a,b) + c && product(a,b) * c){
+  if (sumAndMultiply === sum(a,b) + c && product(a,b) * c){
     console.log('pass');
   }
   else {
