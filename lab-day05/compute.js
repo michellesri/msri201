@@ -16,17 +16,19 @@ function product(a,b) {
   productAB = 'The product of ' + a + ' and ' + b + ' is ' + (a * b);
   console.log(productAB);
   return a * b;
+
 };
 
 //Problem 3
 function sumAndMuliply(a, b, c) {
-  var arr = [];
-  arr.push(sum());
-  arr.push(product());
+  var arr = [sum(sum(a,b), c), product(product(a,b), c)];
+  // arr.push(sum());
+  // arr.push(product());
   sumTo = a + ' and ' + b + ' and ' + c + ' sum to ' + arr[0];
   console.log(sumTo);
   productOf = 'The numbers ' + a + ' and ' + b + ' and ' + c + ' have a product of ' + arr[1];
   console.log(productOf);
+  return arr;
 };
 
 //Problem 4
@@ -39,6 +41,7 @@ function sumArray(arr) {
   console.table(arr);
   qSum = arr + ' was passed in as an array of numbers, and ' + q + 'is their sum.';
   console.log(qSum);
+  return q;
 };
 
 sumArray([10,20,30,40]);
@@ -52,6 +55,7 @@ function multiplyArray(arr) {
   console.table(arr);
   qProd = arr + ' have a product of ' + q + '.';
   console.log(qProd);
+  return q;
 };
 
 multiplyArray([10,20,30,40]);
