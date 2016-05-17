@@ -1,0 +1,29 @@
+/*the colors should be working but i changed the colors and now it's broken*/
+
+body {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  font-family: Arial, inherit;
+  font-size: 20;
+  opacity: .95;
+}
+
+h1 {
+    color: teal;
+    opacity: .9;
+    font-size: 50;
+    font-family: 'Indie Flower', cursive;
+}
+
+h2 {
+  color: teal;
+  padding: 0px;
+  margin: 30px;
+  opacity: .8;
+}
+
+h3 {
+  color: teal;
+  padding: 0px;
+}
