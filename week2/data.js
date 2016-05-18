@@ -53,17 +53,30 @@ for (var i = 0; i < Bounds.length; i++) {
   // Bounds[0] = the first object in the bounds array with keynames pizzaBounds, delBounds.
   locationObjects.push(stores);
 
-  for (var j = 0; j < hours.length; j++) {
-    var currentID = document.getElementById(Bounds[i].name + hours[j]);
-    var text = hours[j] + '  ' + locationObjects[i].hours[j].pizzas + ' pizzas ' + locationObjects[i].hours[j].delivery + ' delivery ' + locationObjects[i].hours[j].drivers + ' drivers recommended.';
-    currentID.textContent = text;
-    totalPizza += locationObjects[i].hours[j].pizzas;
+  // for (var j = 0; j < hours.length; j++) {
+  //   var currentID = document.getElementById(Bounds[i].name + hours[j]);
+  //   var text = hours[j] + '  ' + locationObjects[i].hours[j].pizzas + ' pizzas ' + locationObjects[i].hours[j].delivery + ' delivery ' + locationObjects[i].hours[j].drivers + ' drivers recommended.';
+  //   var x = 'table';
+  //   currentID.innerHTML = text;
+  //   totalPizza += locationObjects[i].hours[j].pizzas;
     //locationObjects[0] = object with the key name of the location ('Hillsboro') and a key name hours = an array of 18hour objects
     // locationOBjects[0].hours[0] = hours = an object with a key name of this specific hour ('8am') and a key name of pizzas (a random number between our bounds (0 and 4))
     // '' it also has a key name of delivery which is a random number between our bounds and a key name of drivers which is the delivery / 3 rounded up.
+  // }
+}
+
+for (var i = 0; i < hours.length; i++) {
+  for (var j = 0; j < locationObjects.length; j++) {
+    var table = document.getElementById(locationObjects[j].name + 'Table');
+    var row = table.insertRow(-1);
+    var html = '<td>' + hours[i] + '</td>' + '<td>' + locationObjects[j].hours[i].pizzas + '</td>' + '<td>' + locationObjects[j].hours[i].delivery + '</td>' + '<td>' + locationObjects[j].hours[i].drivers + '</td>';
+    row.innerHTML = html;
   }
 }
 
+//how to insert rows into tables in javascript
+//http://www.w3schools.com/jsref/met_table_insertrow.asp
+//.insertRow(-1) inserts the row to the very end of the table
 console.log(locationObjects);
 
 function hourValues(pizzaBound, delBound) {
