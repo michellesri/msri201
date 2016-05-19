@@ -45,6 +45,58 @@ function Store(name, hours) {
   this.name = name;
   this.hours = hours;
 }
+var addBoundsButton = document.getElementById('addBoundsButtons');
+var submitButton = document.getElementById('submitButton');
+addBoundsButtons.addEventListener('click', addBounds);
+submitButton.addEventListener('click', addTable);
+//event handers are bad practice. see note to Max and Alex on sales-data.html line 24!!!!
+
+var inputPizzaBounds = [];
+var inputDeliveryBounds = [];
+
+function addBounds(event) {
+  console.log('clicked');
+  var boundType = document.getElementById('boundType').value;
+  var min = document.getElementById('min').value;
+  var max = document.getElementById('max').value;
+  var minMax = [parseInt(min),parseInt(max)];
+
+  if (boundType == 'p') {
+    inputPizzaBounds.push(minMax);
+  }
+  else if(boundType == 'd'){
+    inputDeliveryBounds.push(minMax);
+
+  }
+  console.log('input name ' + inputName);
+  console.log('delivery ' + inputDeliveryBounds);
+  console.log('pizza' + inputPizzaBounds);
+
+}
+
+function addTable() {
+  if (inputDeliveryBounds.length != 6 || inputPizzaBounds.length != 6) {
+    alert('your delivery bounds were ' + inputDeliveryBounds.length + ' and your pizza bounds were ' + inputPizzaBounds.length + ' please enter 6 bounds for delivery and 6 bounds for pizzas');
+    return;
+  }
+  else {
+    var inputName = document.getElementById('inputName').value;
+    var newTable = document.createElement('table');
+    newTable.setAttribute('id', inputName + 'Table');
+    var h3 = document.createElement('h3');
+    var textNode = document.createTextNode(inputName);
+    h3.appendChild(textNode);
+    document.getElementById('tableContainer').appendChild(h3).appendChild(newTable);
+    document.getElementById(inputName + 'Table').innerHTML += '<tr><th>Time</th><th>Pizzas</th><th>Delivery</th><th>Drivers</th></tr>';
+    var myStore = new Store(inputName, hourValues(inputPizzaBounds,inputDeliveryBounds));
+    for (var i = 0; i < hours.length; i++) {
+      var table = document.getElementById(inputName + 'Table');
+      var row = table.insertRow(-1);
+      var html = '<td>' + hours[i] + '</td>' + '<td>' + myStore.hours[i].pizzas + '</td>' + '<td>' + myStore.hours[i].delivery + '</td>' + '<td>' + myStore.hours[i].drivers + '</td>';
+      row.innerHTML = html;
+    }
+  }
+}
 
 var locationObjects = [];
 for (var i = 0; i < Bounds.length; i++) {
