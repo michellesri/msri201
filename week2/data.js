@@ -6,65 +6,193 @@
 var piTotal = document.getElementById('piTotal');
 var totalPizza = 0;
 
-var bound = [
-  [0,4],[0,7],[2,15],[15,35],[12,31],[5,20]
-];
 var hours = ['8am', '9am', '10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','9pm','10pm','11pm','12am','1am'];
-var delBound = [
-  [0,4],[0,4],[1,4],[3,8],[5,12],[5,11]
+
+var Bounds = [
+  {
+    name: 'Hillsboro',
+    delBounds: [[0,4],[0,4],[1,4],[3,8],[5,12],[5,11]],
+    pizzaBounds: [[0,4],[0,7],[2,15],[15,35],[12,31],[5,20]]
+  },
+  {
+    name: 'Pearl',
+    delBounds:[[1,3],[2,8],[1,6],[3,9],[1,3],[6,16]],
+    pizzaBounds: [[1,7],[5,9],[2,13],[18,32],[5,12],[8,20]]
+  },
+  {
+    name: 'DowntownPDX',
+    delBounds: [[0,4],[0,4],[1,4],[4,6],[7,15],[0,2]],
+    pizzaBounds: [[0,4],[0,7],[2,15],[10,26],[8,22],[0,8]]
+  },
+  {
+    name: 'Buckman',
+    delBounds: [[0,4],[0,4],[0,4],[13,18],[5,22],[5,21]],
+    pizzaBounds:[[0,4],[0,7],[5,15],[25,39],[22,36],[16,31]]
+  },
+  {
+    name: 'PDXairport',
+    delBounds: [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],
+    pizzaBounds: [[2,7],[3,9],[1,5],[5,13],[22,42],[15,21]]
+  },
+  {
+    name: 'Clackamas',
+    delBounds: [[0,4],[0,4],[1,4],[5,9],[2,5],[2,4]],
+    pizzaBounds:[[0,4],[0,7],[2,15],[6,19],[4,8],[2,5]]
+  }
 ];
 
-var locations = ['Hillsboro', 'Pearl', 'DowntownPDX', 'Buckman', 'PDXairport', 'Clackamas'];
+function Store(name, hours) {
+  this.name = name;
+  this.hours = hours;
+}
+var addBoundsButton = document.getElementById('addBoundsButtons');
+var submitButton = document.getElementById('submitButton');
+addBoundsButtons.addEventListener('click', addBounds);
+submitButton.addEventListener('click', addTable);
+//event handers are bad practice. see note to Max and Alex on sales-data.html line 24!!!!
 
-var locationObjects = [];
-for (var i = 0; i < locations.length; i++) {
-  var stores = {};
-  stores.name = locations[i];
-  stores.hours = pHours();
-  locationObjects.push(stores);
+var inputPizzaBounds = [];
+var inputDeliveryBounds = [];
 
-  for (var j = 0; j < hours.length; j++) {
-    var currentID = document.getElementById(locations[i] + hours[j]);
-    var text = hours[j] + '  ' + locationObjects[i].hours[j].pizzas + ' pizzas ' + locationObjects[i].hours[j].delivery + ' delivery ' + locationObjects[i].hours[j].drivers + ' drivers recommended.';
-    currentID.textContent = text;
-    totalPizza += locationObjects[i].hours[j].pizzas;
+function addBounds(event) {
+  console.log('clicked');
+  var boundType = document.getElementById('boundType').value;
+  var min = document.getElementById('min').value;
+  var max = document.getElementById('max').value;
+  var minMax = [parseInt(min),parseInt(max)];
+
+  if (boundType == 'p') {
+    inputPizzaBounds.push(minMax);
+  }
+  else if(boundType == 'd'){
+    inputDeliveryBounds.push(minMax);
+
+  }
+  console.log('input name ' + inputName);
+  console.log('delivery ' + inputDeliveryBounds);
+  console.log('pizza' + inputPizzaBounds);
+
+}
+
+function addTable() {
+  if (inputDeliveryBounds.length != 6 || inputPizzaBounds.length != 6) {
+    alert('your delivery bounds were ' + inputDeliveryBounds.length + ' and your pizza bounds were ' + inputPizzaBounds.length + ' please enter 6 bounds for delivery and 6 bounds for pizzas');
+    return;
+  }
+  else {
+    var inputName = document.getElementById('inputName').value;
+    var newTable = document.createElement('table');
+    newTable.setAttribute('id', inputName + 'Table');
+    var h3 = document.createElement('h3');
+    var textNode = document.createTextNode(inputName);
+    h3.appendChild(textNode);
+    document.getElementById('tableContainer').appendChild(h3).appendChild(newTable);
+    document.getElementById(inputName + 'Table').innerHTML += '<tr><th>Time</th><th>Pizzas</th><th>Delivery</th><th>Drivers</th></tr>';
+    var myStore = new Store(inputName, hourValues(inputPizzaBounds,inputDeliveryBounds));
+    for (var i = 0; i < hours.length; i++) {
+      var table = document.getElementById(inputName + 'Table');
+      var row = table.insertRow(-1);
+      var html = '<td>' + hours[i] + '</td>' + '<td>' + myStore.hours[i].pizzas + '</td>' + '<td>' + myStore.hours[i].delivery + '</td>' + '<td>' + myStore.hours[i].drivers + '</td>';
+      row.innerHTML = html;
+    }
   }
 }
-function pHours() {
-  var arr = [];
+
+var locationObjects = [];
+for (var i = 0; i < Bounds.length; i++) {
+  var stores = new Store(Bounds[i].name, hourValues(Bounds[i].pizzaBounds, Bounds[i].delBounds));
+  // hourValues takes in two paramenters (pizzaBound, delBound) which are arrays of arrays
+  // Bounds[0] = the first object in the bounds array with keynames pizzaBounds, delBounds.
+  locationObjects.push(stores);
+
+  // for (var j = 0; j < hours.length; j++) {
+  //   var currentID = document.getElementById(Bounds[i].name + hours[j]);
+  //   var text = hours[j] + '  ' + locationObjects[i].hours[j].pizzas + ' pizzas ' + locationObjects[i].hours[j].delivery + ' delivery ' + locationObjects[i].hours[j].drivers + ' drivers recommended.';
+  //   var x = 'table';
+  //   currentID.innerHTML = text;
+  //   totalPizza += locationObjects[i].hours[j].pizzas;
+    //locationObjects[0] = object with the key name of the location ('Hillsboro') and a key name hours = an array of 18hour objects
+    // locationOBjects[0].hours[0] = hours = an object with a key name of this specific hour ('8am') and a key name of pizzas (a random number between our bounds (0 and 4))
+    // '' it also has a key name of delivery which is a random number between our bounds and a key name of drivers which is the delivery / 3 rounded up.
+  // }
+}
+
+for (var i = 0; i < hours.length; i++) {
+  for (var j = 0; j < locationObjects.length; j++) {
+    var table = document.getElementById(locationObjects[j].name + 'Table');
+    var row = table.insertRow(-1);
+    var html = '<td>' + hours[i] + '</td>' + '<td>' + locationObjects[j].hours[i].pizzas + '</td>' + '<td>' + locationObjects[j].hours[i].delivery + '</td>' + '<td>' + locationObjects[j].hours[i].drivers + '</td>';
+    row.innerHTML = html;
+  }
+}
+
+//how to insert rows into tables in javascript
+//http://www.w3schools.com/jsref/met_table_insertrow.asp
+//.insertRow(-1) inserts the row to the very end of the table
+console.log(locationObjects);
+
+function hourValues(pizzaBound, delBound) {
+  var arrayOfHourObjects = [];
   for (var i = 0; i < 18; i++) {
-    var hourOne = {
+    var currentHour = {
     };
 
-    hourOne.name = hours[i];
+    currentHour.name = hours[i];
     if (i < 3) {
-      hourOne.pizzas = genNum(bound[0][0],bound[0][1]);
-      hourOne.delivery = genNum(delBound[0][0], delBound[0][1]);
-      hourOne.drivers = getDrivers(hourOne.delivery);
+      currentHour.pizzas = genNum(pizzaBound[0][0],pizzaBound[0][1]);
+      if (currentHour.pizzas > delBound[0][1]) {
+        currentHour.delivery = genNum(delBound[0][0], delBound[0][1]);
+      }
+      else {
+        currentHour.delivery = genNum(delBound[0][0], currentHour.pizzas);
+      }
+      currentHour.drivers = getDrivers(currentHour.delivery);
+      // instead of currentHour.drivers = getDrivers. i could do Math.ceil(currentHour.delivery / 3);
     }
     else if (i < 7) {
-      hourOne.pizzas = genNum(bound[1][0],bound[1][1]);
-      hourOne.delivery = genNum(delBound[1][0], delBound[1][1]);
-      hourOne.drivers = getDrivers(hourOne.delivery);
+      currentHour.pizzas = genNum(pizzaBound[1][0],pizzaBound[1][1]);
+      if (currentHour.pizzas > delBound[0][1]) {
+        currentHour.delivery = genNum(delBound[0][0], delBound[1][1]);
+      }
+      else {
+        currentHour.delivery = genNum(delBound[0][0], currentHour.pizzas);
+      }
+      currentHour.drivers = getDrivers(currentHour.delivery);
     }
     else if (i < 11) {
-      hourOne.pizzas = genNum(bound[2][0],bound[2][1]);
-      hourOne.delivery = genNum(delBound[2][0], delBound[2][1]);
-      hourOne.drivers = getDrivers(hourOne.delivery);
+      currentHour.pizzas = genNum(pizzaBound[2][0],pizzaBound[2][1]);
+      if (currentHour.pizzas > delBound[0][1]) {
+        currentHour.delivery = genNum(delBound[0][0], delBound[2][1]);
+      }
+      else {
+        currentHour.delivery = genNum(delBound[0][0], currentHour.pizzas);
+      }
+      currentHour.drivers = getDrivers(currentHour.delivery);
     }
     else if (i < 15) {
-      hourOne.pizzas = genNum(bound[3][0],bound[3][1]);
-      hourOne.delivery = genNum(delBound[3][0], delBound[3][1]);
-      hourOne.drivers = getDrivers(hourOne.delivery);
+      currentHour.pizzas = genNum(pizzaBound[3][0],pizzaBound[3][1]);
+      if (currentHour.pizzas > delBound[0][1]) {
+        currentHour.delivery = genNum(delBound[0][0], delBound[3][1]);
+      }
+      else {
+        currentHour.delivery = genNum(delBound[0][0], currentHour.pizzas);
+      }
+      currentHour.drivers = getDrivers(currentHour.delivery);
     }
     else if (i < 19) {
-      hourOne.pizzas = genNum(bound[4][0],bound[4][1]);
-      hourOne.delivery = genNum(delBound[4][0], delBound[4][1]);
-      hourOne.drivers = getDrivers(hourOne.delivery);
+      currentHour.pizzas = genNum(pizzaBound[4][0],pizzaBound[4][1]);
+      if (currentHour.pizzas > delBound[0][1]) {
+        currentHour.delivery = genNum(delBound[0][0], delBound[4][1]);
+      }
+      else {
+        currentHour.delivery = genNum(delBound[0][0], currentHour.pizzas);
+      }
+      currentHour.drivers = getDrivers(currentHour.delivery);
     }
-    arr.push(hourOne);
+
+    arrayOfHourObjects.push(currentHour);
   }
-  return arr;
+  return arrayOfHourObjects;
 }
 
 function getDrivers (deliveries){

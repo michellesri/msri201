@@ -1,7 +1,7 @@
 /*the colors should be working but i changed the colors and now it's broken*/
 
 body {
-  background-color: black;
+  background-color: gray;
   color: white;
   padding: 20px;
   font-family: Arial, inherit;
@@ -10,10 +10,15 @@ body {
 }
 
 h1 {
-    color: teal;
+    color: black;
     opacity: .9;
-    font-size: 50;
+    font-size: 50px;
     font-family: 'Indie Flower', cursive;
+    text-align: center;
+    border: 20px white solid;
+    border-radius: 15%;
+    padding: 5px;
+    margin: auto;
 }
 
 h2 {
@@ -21,9 +26,26 @@ h2 {
   padding: 0px;
   margin: 30px;
   opacity: .8;
+  font-family: monospace;
 }
 
 h3 {
-  color: teal;
+  color: black;
   padding: 0px;
+}
+
+span {
+  color: #a11616;
+  display: block;
+  opacity: .7;
+}
+
+#quote {
+  display: block;
+  margin: 1em auto;
+  font-family: cursive;
+}
+
+.quoteContainer {
+  width: 100%;
 }
