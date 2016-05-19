@@ -86,7 +86,9 @@ function addTable() {
     var h3 = document.createElement('h3');
     var textNode = document.createTextNode(inputName);
     h3.appendChild(textNode);
-    document.getElementById('tableContainer').appendChild(h3).appendChild(newTable);
+    var tableContainerID = document.getElementById('tableContainer');
+    tableContainerID.appendChild(h3);
+    tableContainerID.appendChild(newTable);
     document.getElementById(inputName + 'Table').innerHTML += '<tr><th>Time</th><th>Pizzas</th><th>Delivery</th><th>Drivers</th></tr>';
     var myStore = new Store(inputName, hourValues(inputPizzaBounds,inputDeliveryBounds));
     for (var i = 0; i < hours.length; i++) {
