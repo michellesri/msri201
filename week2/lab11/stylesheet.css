@@ -1,0 +1,8 @@
+#picParent {
+  width:900px;
+}
+
+.image.clear {
+  float: left;
+  width: 300px;
+}
