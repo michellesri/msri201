@@ -7,14 +7,16 @@
 </head>
 <body>
   <h1>Bus Mall Images</h1>
-<!--
-put the code into a figure later to add the total number of clicks later
-  <figure>
-  <img id='pic1'onclick='switchPic()'src='jon.jpg' alt='pic' width="300" height="200" align='left'>
-  <figcaption id='caption1'></figcaption>
-</figure> -->
-  <img id='pic1'onclick='switchPic()'src='jon.jpg' alt='pic' width="300" height="200" align='left'>
-  <img id='pic2' onclick='switchPic()'src='sf.jpg' alt='pic' width="300" height="200" align='right'>
+  <p>Welcome to BusMall!</p>
+  <p>Instructions: click one of the three images to vote (16 times). when you click the image, the vote will be logged and the images will change so that you can continue voting. </p>
+  <div>
+    <div id='divImg' class='images'>image</div>
+    <div id='divImg2' class='images'>image</div>
+    <div id='divImg3' class='images'>image</div>
+  </div>
+  <button id='displayVotesBtn'>Display Votes</button>
+  <button id='voteMoreBtn'>Vote More</button>
+  <p id='totalVotes'></p>
 <script src='app.js'></script>
 </body>
 </html>
