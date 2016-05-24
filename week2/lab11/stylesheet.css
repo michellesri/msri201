@@ -1,0 +1,32 @@
+#picParent {
+  width:900px;
+}
+
+
+#divImg {
+  width: 200px;
+  height: 200px;
+}
+
+#divImg2 {
+  width: 200px;
+  height: 200px;
+}
+
+#divImg3 {
+  width: 200px;
+  height: 200px;
+}
+
+.images {
+  float: left;
+  background-size: 100%, auto;
+  background-repeat: no-repeat;
+
+}
+
+/*what is this for?*/
+/*.image.clear {
+  float: left;
+  width: 300px;
+}*/
