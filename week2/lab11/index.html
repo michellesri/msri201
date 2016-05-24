@@ -14,9 +14,14 @@
     <div id='divImg2' class='images'>image</div>
     <div id='divImg3' class='images'>image</div>
   </div>
-  <button id='displayVotesBtn'>Display Votes</button>
-  <button id='voteMoreBtn'>Vote More</button>
-  <p id='totalVotes'></p>
-<script src='app.js'></script>
+  <div id='buttonContainer'>
+    <button id='displayVotesBtn'>Display Votes</button>
+    <button id='voteMoreBtn'>Vote More</button>
+    <p id='totalVotes'></p>
+  </div>
+
+  <canvas id='canvas' width='100%' height='25%'></canvas>
+  <script src='vendor/Chart.min.js'></script>
+  <script src='app.js'></script>
 </body>
 </html>

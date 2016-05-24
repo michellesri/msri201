@@ -1,6 +1,8 @@
 function gebi(id) {
   return document.getElementById(id);
 }
+
+var totalClicks = 0;
 var imgNames = [
   'bird.png',
   'plane.jpg',
@@ -55,8 +57,7 @@ for (var i = 0; i < imgNames.length; i++) {
   images.push(img);
 }
 
-// console.log('divImg.imageIndex = ' + divImg.imageIndex);
-
+// console.log('divImg.imageIndex = ' + divImg.imageInd
 divImg.addEventListener('click', function() {
   refreshImage(divImg);
 });
@@ -66,23 +67,64 @@ divImg2.addEventListener('click', function() {
 divImg3.addEventListener('click', function() {
   refreshImage(divImg3);
 });
+
+var buttonContainer = gebi('buttonContainer');
+buttonContainer.style.display = 'none';
+
 function refreshImage(location) {
   images[location.imageIndex].incrementClicks();
   var s = 'click counts: ';
   images.map(function(ele) {s += ele.Nclicks;});
-  console.log(s);
+  totalClicks++;
+  console.log('total clicks ' + totalClicks);
+  if (totalClicks >= 16) {
+    buttonContainer.style.display = 'inline';
 
-  showNewImage(getRandomInt(), divImg);
-  showNewImage(getRandomInt(), divImg2);
-  showNewImage(getRandomInt(), divImg3);
+  }
+  else {
+    var displayVotesBtn = gebi('displayVotesBtn');
+    displayVotesBtn.addEventListener('click', function(){
+      // display these as tables later?
+      var s = '';
+      for (var i = 0; i < images.length; i++) {
+        s += ' ' + images[i].src + images[i].Nshown + images[i].Nclicks + '</br>';
+      }
+      gebi('totalVotes').innerHTML = s;
+    });
+
+    showNewImage(getRandomInt(), divImg);
+    showNewImage(getRandomInt(), divImg2);
+    showNewImage(getRandomInt(), divImg3);
+  }
 }
 
 showNewImage(getRandomInt(), divImg);
 showNewImage(getRandomInt(), divImg2);
 showNewImage(getRandomInt(), divImg3);
 
-var displayVotesBtn = gebi('displayVotesBtn');
-displayVotesBtn.addEventListener('click', function(){
-  // display these as tables later?
-  gebi('totalVotes').innerHTML = 'here are your total # votes per image';
-});
+function draw(numArray, pcntArray, labelArray) {
+  var canvas = document.getElementById('canvas');
+
+  var myChart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: labelArray,
+      datasets: [{
+        label: '# of Votes',
+        data: numArray,
+      },
+        {
+          type: 'line',
+          label: 'votes/shown %',
+          data: pcntArray
+        }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: { beginAtZero:true}
+        }]
+      }
+    }
+  });
+}
