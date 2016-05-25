@@ -23,6 +23,7 @@ var divImg2 = gebi('divImg2');
 var divImg3 = gebi('divImg3');
 var imagesContainer = gebi('imagesContainer');
 var newRoundBtn = gebi('newRoundBtn');
+var buttonContainer = gebi('buttonContainer');
 
 function getRandomInt() {
   return Math.floor(Math.random() * imgNames.length);
@@ -54,11 +55,7 @@ function Image(src) {
   };
 }
 
-for (var i = 0; i < imgNames.length; i++) {
-  var img = new Image(imgNames[i]);
-  images.push(img);
-}
-
+resetPage();
 // console.log('divImg.imageIndex = ' + divImg.imageInd
 divImg.addEventListener('click', function() {
   refreshImage(divImg);
@@ -70,9 +67,7 @@ divImg3.addEventListener('click', function() {
   refreshImage(divImg3);
 });
 
-var buttonContainer = gebi('buttonContainer');
 buttonContainer.style.display = 'none';
-
 
 function displayChart(){
   var s = '';
@@ -84,14 +79,21 @@ function displayChart(){
   gebi('totalVotes').innerHTML = s;
   draw(images, imgNames);
   newRoundBtn.style.visibility = 'visible';
-  newRoundBtn.addEventListener('click', function(){
 
-    showNewImage(getRandomInt(), divImg);
-    showNewImage(getRandomInt(), divImg2);
-    showNewImage(getRandomInt(), divImg3);
-  });
 }
 
+newRoundBtn.addEventListener('click', function(){
+  newRoundBtn.style.display = 'none';
+  canvas.style.display = 'none';
+  imagesContainer.style.display = 'block';
+  totalClicks = 0;
+  gebi('totalVotes').innerHTML = '';
+  resetPage();
+  showNewImage(getRandomInt(), divImg);
+  showNewImage(getRandomInt(), divImg2);
+  showNewImage(getRandomInt(), divImg3);
+
+});
 
 var maxClicks = 16;
 
@@ -104,16 +106,13 @@ function refreshImage(location) {
   if (totalClicks >= maxClicks && totalClicks < 24) {
     buttonContainer.style.display = 'inline';
     imagesContainer.style.display = 'none';
-    }
-    else if(totalClicks >= 24) {
-      buttonContainer.style.display = 'none';
-      imagesContainer.style.display = 'none';
-      displayChart();
+  }
+  else if(totalClicks >= 24) {
+    buttonContainer.style.display = 'none';
+    imagesContainer.style.display = 'none';
+    displayChart();
 
-    }
-
-  var displayVotesBtn = gebi('displayVotesBtn');
-  displayVotesBtn.addEventListener('click', displayChart);
+  }
 
   showNewImage(getRandomInt(), divImg);
   showNewImage(getRandomInt(), divImg2);
@@ -124,6 +123,8 @@ showNewImage(getRandomInt(), divImg);
 showNewImage(getRandomInt(), divImg2);
 showNewImage(getRandomInt(), divImg3);
 
+var displayVotesBtn = gebi('displayVotesBtn');
+displayVotesBtn.addEventListener('click', displayChart);
 
 var voteMoreBtn = gebi('voteMoreBtn');
 voteMoreBtn.addEventListener('click', function(){
@@ -132,12 +133,12 @@ voteMoreBtn.addEventListener('click', function(){
   buttonContainer.style.display = 'none';
   imagesContainer.style.display = 'inline';
 
-})
+});
 
-
+var canvas = document.getElementById('canvas');
 
 function draw(images, imgNames) {
-  var canvas = document.getElementById('canvas');
+  canvas.style.display = 'block';
   var clicksArr = [];
   var shownArr = [];
   var percentageArr = [];
