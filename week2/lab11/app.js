@@ -74,8 +74,7 @@ function displayChart(){
   for (var i = 0; i < images.length; i++) {
     s += ' ' + images[i].src + ' had ' + images[i].Nclicks + ' click(s) and was shown ' + images[i].Nshown + ' time(s).' + '</br>';
   }
-  displayVotesBtn.style.display = 'none';
-  voteMoreBtn.style.display = 'none';
+  buttonContainer.style.display = 'none';
   gebi('totalVotes').innerHTML = s;
   draw(images, imgNames);
   newRoundBtn.style.visibility = 'visible';
@@ -83,7 +82,7 @@ function displayChart(){
 }
 
 newRoundBtn.addEventListener('click', function(){
-  newRoundBtn.style.display = 'none';
+  newRoundBtn.style.visibility = 'hidden';
   canvas.style.display = 'none';
   imagesContainer.style.display = 'block';
   totalClicks = 0;
@@ -169,4 +168,12 @@ function draw(images, imgNames) {
       }
     }
   });
+}
+
+function resetPage(){
+  images = [];
+  for (var i = 0; i < imgNames.length; i++) {
+    var img = new Image(imgNames[i]);
+    images.push(img);
+  }
 }
