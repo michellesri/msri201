@@ -25,6 +25,10 @@
 
 }
 
+#newRoundBtn {
+  visibility:hidden;
+}
+
 /*what is this for?*/
 /*.image.clear {
   float: left;
