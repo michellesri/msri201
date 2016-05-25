@@ -9,7 +9,7 @@
   <h1>Bus Mall Images</h1>
   <p>Welcome to BusMall!</p>
   <p>Instructions: click one of the three images to vote (16 times). when you click the image, the vote will be logged and the images will change so that you can continue voting. </p>
-  <div>
+  <div id='imagesContainer'>
     <div id='divImg' class='images'>image</div>
     <div id='divImg2' class='images'>image</div>
     <div id='divImg3' class='images'>image</div>
@@ -19,7 +19,7 @@
     <button id='voteMoreBtn'>Vote More</button>
     <p id='totalVotes'></p>
   </div>
-
+  <button id='newRoundBtn'>New Round Button</button>
   <canvas id='canvas' width='100%' height='25%'></canvas>
   <script src='vendor/Chart.min.js'></script>
   <script src='app.js'></script>

@@ -21,6 +21,8 @@ var images = [];
 var divImg = gebi('divImg');
 var divImg2 = gebi('divImg2');
 var divImg3 = gebi('divImg3');
+var imagesContainer = gebi('imagesContainer');
+var newRoundBtn = gebi('newRoundBtn');
 
 function getRandomInt() {
   return Math.floor(Math.random() * imgNames.length);
@@ -71,52 +73,91 @@ divImg3.addEventListener('click', function() {
 var buttonContainer = gebi('buttonContainer');
 buttonContainer.style.display = 'none';
 
+
+function displayChart(){
+  var s = '';
+  for (var i = 0; i < images.length; i++) {
+    s += ' ' + images[i].src + ' had ' + images[i].Nclicks + ' click(s) and was shown ' + images[i].Nshown + ' time(s).' + '</br>';
+  }
+  displayVotesBtn.style.display = 'none';
+  voteMoreBtn.style.display = 'none';
+  gebi('totalVotes').innerHTML = s;
+  draw(images, imgNames);
+  newRoundBtn.style.visibility = 'visible';
+  newRoundBtn.addEventListener('click', function(){
+
+    showNewImage(getRandomInt(), divImg);
+    showNewImage(getRandomInt(), divImg2);
+    showNewImage(getRandomInt(), divImg3);
+  });
+}
+
+
+var maxClicks = 16;
+
 function refreshImage(location) {
   images[location.imageIndex].incrementClicks();
   var s = 'click counts: ';
   images.map(function(ele) {s += ele.Nclicks;});
   totalClicks++;
   console.log('total clicks ' + totalClicks);
-  if (totalClicks >= 16) {
+  if (totalClicks >= maxClicks && totalClicks < 24) {
     buttonContainer.style.display = 'inline';
+    imagesContainer.style.display = 'none';
+    }
+    else if(totalClicks >= 24) {
+      buttonContainer.style.display = 'none';
+      imagesContainer.style.display = 'none';
+      displayChart();
 
-  }
-  else {
-    var displayVotesBtn = gebi('displayVotesBtn');
-    displayVotesBtn.addEventListener('click', function(){
-      // display these as tables later?
-      var s = '';
-      for (var i = 0; i < images.length; i++) {
-        s += ' ' + images[i].src + images[i].Nshown + images[i].Nclicks + '</br>';
-      }
-      gebi('totalVotes').innerHTML = s;
-    });
+    }
 
-    showNewImage(getRandomInt(), divImg);
-    showNewImage(getRandomInt(), divImg2);
-    showNewImage(getRandomInt(), divImg3);
-  }
+  var displayVotesBtn = gebi('displayVotesBtn');
+  displayVotesBtn.addEventListener('click', displayChart);
+
+  showNewImage(getRandomInt(), divImg);
+  showNewImage(getRandomInt(), divImg2);
+  showNewImage(getRandomInt(), divImg3);
 }
 
 showNewImage(getRandomInt(), divImg);
 showNewImage(getRandomInt(), divImg2);
 showNewImage(getRandomInt(), divImg3);
 
-function draw(numArray, pcntArray, labelArray) {
-  var canvas = document.getElementById('canvas');
 
+var voteMoreBtn = gebi('voteMoreBtn');
+voteMoreBtn.addEventListener('click', function(){
+  maxClicks = 24;
+
+  buttonContainer.style.display = 'none';
+  imagesContainer.style.display = 'inline';
+
+})
+
+
+
+function draw(images, imgNames) {
+  var canvas = document.getElementById('canvas');
+  var clicksArr = [];
+  var shownArr = [];
+  var percentageArr = [];
+  for (var i = 0; i < images.length; i++) {
+    clicksArr.push(images[i].Nclicks);
+    var x = 100 * (images[i].Nclicks / images[i].Nshown);
+    shownArr.push(x);
+  }
   var myChart = new Chart(canvas, {
     type: 'bar',
     data: {
-      labels: labelArray,
+      labels: imgNames,
       datasets: [{
         label: '# of Votes',
-        data: numArray,
+        data: clicksArr,
       },
         {
           type: 'line',
           label: 'votes/shown %',
-          data: pcntArray
+          data: shownArr,
         }]
     },
     options: {
