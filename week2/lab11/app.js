@@ -69,15 +69,19 @@ divImg3.addEventListener('click', function() {
 
 buttonContainer.style.display = 'none';
 
+//// note to self: button container needs to consistently use display or visibility. not both.
 function displayChart(){
   var s = '';
   for (var i = 0; i < images.length; i++) {
     s += ' ' + images[i].src + ' had ' + images[i].Nclicks + ' click(s) and was shown ' + images[i].Nshown + ' time(s).' + '</br>';
   }
-  buttonContainer.style.display = 'none';
+  buttonContainer.style.display = 'block';
+  // block or none are the choices^^^^^
   gebi('totalVotes').innerHTML = s;
   draw(images, imgNames);
   newRoundBtn.style.visibility = 'visible';
+  localStorage.chartVisible = true;
+  console.log('displayyyyy');
 
 }
 
@@ -91,11 +95,12 @@ newRoundBtn.addEventListener('click', function(){
   showNewImage(getRandomInt(), divImg);
   showNewImage(getRandomInt(), divImg2);
   showNewImage(getRandomInt(), divImg3);
-
 });
 
 var maxClicks = 16;
 
+// added empty images array right here (1/2). because the images were storing twice making localstorage show both sets.
+images = [];
 function refreshImage(location) {
   images[location.imageIndex].incrementClicks();
   var s = 'click counts: ';
@@ -112,15 +117,22 @@ function refreshImage(location) {
     displayChart();
 
   }
+  var firstImage  = getRandomInt();
+  var secondImage = getRandomInt();
+  var thirdImage = getRandomInt();
+  showNewImage(firstImage, divImg);
+  showNewImage(secondImage, divImg2);
+  showNewImage(thirdImage, divImg3);
+  localStorage.images = JSON.stringify(images);
+  localStorage.firstImage = firstImage;
+  localStorage.secondImage = secondImage;
+  localStorage.thirdImage = thirdImage;
 
-  showNewImage(getRandomInt(), divImg);
-  showNewImage(getRandomInt(), divImg2);
-  showNewImage(getRandomInt(), divImg3);
 }
 
-showNewImage(getRandomInt(), divImg);
-showNewImage(getRandomInt(), divImg2);
-showNewImage(getRandomInt(), divImg3);
+// showNewImage(getRandomInt(), divImg);
+// showNewImage(getRandomInt(), divImg2);
+// showNewImage(getRandomInt(), divImg3);
 
 var displayVotesBtn = gebi('displayVotesBtn');
 displayVotesBtn.addEventListener('click', displayChart);
@@ -177,3 +189,44 @@ function resetPage(){
     images.push(img);
   }
 }
+
+var firstImageBack = localStorage.firstImage;
+var secondImageBack = localStorage.secondImage;
+var thirdImageBack = localStorage.thirdImage;
+if(!firstImageBack && !secondImageBack && !thirdImageBack){
+  console.log('localStorage does not hold state');
+  firstImageBack = getRandomInt();
+  secondImageBack = getRandomInt();
+  thirdImageBack = getRandomInt();
+  /// added empty images array right here (2/2)
+  images = [];
+  for (var i = 0; i < imgNames.length; i++){
+    var img = new Image(imgNames[i]);
+    images.push(img);
+  }
+} else {
+  console.log('localStorage has state');
+  var imagesBack = JSON.parse(localStorage.images);
+  for (var i = 0; i < imgNames.length; i++) {
+    var img = new Image(imgNames[i]);
+    img.Nclicks = imagesBack[i].Nclicks;
+    img.Nshown = imagesBack[i].Nshown;
+    images.push(img);
+  }
+}
+if (localStorage.chartVisible) {
+  displayChart();
+  imagesContainer.style.display = 'none';
+}
+console.log(images);
+showNewImage(firstImageBack, divImg);
+showNewImage(secondImageBack, divImg2);
+showNewImage(thirdImageBack, divImg3);
+
+//localStorage.chartVisible
+// localStorage.images = JSON.stringify(images);
+// localStorage.firstImage = firstImage;
+// localStorage.secondImage = secondImage;
+// localStorage.thirdImage = thirdImage;
+
+//the new round goes up until 24. doesn't stop at 16.

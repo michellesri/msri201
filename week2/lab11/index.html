@@ -3,11 +3,13 @@
 <html>
 <head>
   <link rel='stylesheet' type='text/css' href='stylesheet.css'>
+  <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
   <title>Bus Mall</title>
 </head>
 <body>
-  <h1>Bus Mall Images</h1>
-  <p>Welcome to BusMall!</p>
+  <p id='hello'>Hello!</p>
+  <h1 class='slide-left'>Bus Mall Images</h1>
+  <p>Welcome to BusMall!</p> <p id='warning'>ALERT!!! A GAME!!!</p>
   <p>Instructions: click one of the three images to vote (16 times). when you click the image, the vote will be logged and the images will change so that you can continue voting. </p>
   <div id='imagesContainer'>
     <div id='divImg' class='images'>image</div>
@@ -15,12 +17,14 @@
     <div id='divImg3' class='images'>image</div>
   </div>
   <div id='buttonContainer'>
-    <button id='displayVotesBtn'>Display Votes</button>
-    <button id='voteMoreBtn'>Vote More</button>
+    <button class='button' id='displayVotesBtn'>Display Votes</button>
+    <button class='button' id='voteMoreBtn'>Vote More</button>
     <p id='totalVotes'></p>
   </div>
-  <button id='newRoundBtn'>New Round Button</button>
+  <button class='button' id='newRoundBtn'>New Round Button</button>
   <canvas id='canvas' width='100%' height='25%'></canvas>
+  <video src='vid/ruth.mp4' width='55%' preload= 'auto' poster='pic/frame.png' controls>
+  </video>
   <script src='vendor/Chart.min.js'></script>
   <script src='app.js'></script>
 </body>

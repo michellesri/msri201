@@ -29,6 +29,67 @@
   visibility:hidden;
 }
 
+h1 {
+  font-family: 'Tangerine', serif;
+  font-size: 40px;
+  font-style: italic;
+  text-shadow: 2px 2px 2px #aaa;
+  color: white;
+}
+
+body {
+  background-color: lightblue;
+}
+
+/*animations start here*/
+
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+h1 {
+    width: 170px;
+    height: 120px;
+    background-color: teal;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 4s;
+    animation-name: example;
+    animation-duration: 4s;
+}
+
+@-webkit-keyframes example {
+    from {background-color: blue;}
+    to {background-color: teal;}
+}
+
+/*reapeating animation at the top*/
+#hello {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+}
+
+#warning {
+    float: right;
+    font-size: 30;
+    color: red;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    -webkit-transform: rotate(20deg); /* Safari */
+    transform: rotate(20deg);
+}
 /*what is this for?*/
 /*.image.clear {
   float: left;
