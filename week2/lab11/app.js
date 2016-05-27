@@ -98,6 +98,8 @@ newRoundBtn.addEventListener('click', function(){
 
 var maxClicks = 16;
 
+// added empty images array right here
+images = [];
 function refreshImage(location) {
   images[location.imageIndex].incrementClicks();
   var s = 'click counts: ';
@@ -195,6 +197,8 @@ if(!firstImageBack && !secondImageBack && !thirdImageBack){
   firstImageBack = getRandomInt();
   secondImageBack = getRandomInt();
   thirdImageBack = getRandomInt();
+  /// added empty images array right here
+  images = [];
   for (var i = 0; i < imgNames.length; i++){
     var img = new Image(imgNames[i]);
     images.push(img);
@@ -223,3 +227,5 @@ showNewImage(thirdImageBack, divImg3);
 // localStorage.firstImage = firstImage;
 // localStorage.secondImage = secondImage;
 // localStorage.thirdImage = thirdImage;
+
+//the new round goes up until 24. doesn't stop at 16.
