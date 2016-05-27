@@ -69,13 +69,14 @@ divImg3.addEventListener('click', function() {
 
 buttonContainer.style.display = 'none';
 
+//// note to self: button container needs to consistently use display or visibility. not both.
 function displayChart(){
   var s = '';
   for (var i = 0; i < images.length; i++) {
     s += ' ' + images[i].src + ' had ' + images[i].Nclicks + ' click(s) and was shown ' + images[i].Nshown + ' time(s).' + '</br>';
   }
   buttonContainer.style.display = 'block';
-  // block or none.
+  // block or none are the choices^^^^^
   gebi('totalVotes').innerHTML = s;
   draw(images, imgNames);
   newRoundBtn.style.visibility = 'visible';
@@ -98,7 +99,7 @@ newRoundBtn.addEventListener('click', function(){
 
 var maxClicks = 16;
 
-// added empty images array right here
+// added empty images array right here (1/2). because the images were storing twice making localstorage show both sets.
 images = [];
 function refreshImage(location) {
   images[location.imageIndex].incrementClicks();
@@ -197,7 +198,7 @@ if(!firstImageBack && !secondImageBack && !thirdImageBack){
   firstImageBack = getRandomInt();
   secondImageBack = getRandomInt();
   thirdImageBack = getRandomInt();
-  /// added empty images array right here
+  /// added empty images array right here (2/2)
   images = [];
   for (var i = 0; i < imgNames.length; i++){
     var img = new Image(imgNames[i]);
