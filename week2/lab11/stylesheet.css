@@ -77,6 +77,15 @@ h1 {
   animation-name: slidein;
   animation-iteration-count: infinite;
 }
+
+#warning {
+    float: right;
+    font-size: 30;
+    color: red;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    -webkit-transform: rotate(20deg); /* Safari */
+    transform: rotate(20deg);
+}
 /*what is this for?*/
 /*.image.clear {
   float: left;
